@@ -22,15 +22,10 @@
     }
   );
 
-  const CyclOSM = L.tileLayer(
-    "https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png",
-    {
-      maxZoom: 20,
-
-   
-        
-    }
-  ).addTo(map);
+  const OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    maxZoom: 17,
+    attribution: ' &copy;  <a href="https://opentopomap.org">OpenTopoMap</a>'
+  }).addTo(map);
 
  
 
@@ -109,7 +104,7 @@
 
 // layer panel
 const baseMaps = {
-    "CycIOSM": CyclOSM,
+    "OpenTopoMap": OpenTopoMap,
     "OpenStreetMap": osmBasemap,
     "EsriSatelite" : esriSatelitBasemap,
 };
