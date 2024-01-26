@@ -91,14 +91,14 @@
  
 
 //   layer GeoJson
-  const shpDesa = new L.GeoJSON.AJAX(["./../GIS/cihaubertiDesa.geojson"], {
+  const shpDesa = new L.GeoJSON.AJAX(["./../gis/cihaubertiDesa.geojson"], {
     onEachFeature: popupDesa,
     style: myStyle,
   }).addTo(map);
 
 
   const fasilitasKesehatan = new L.GeoJSON.AJAX(
-    ["./../GIS/fasilitaskesehatan.geojson"],{onEachFeature: popupKesehatan }
+    ["./../gis/fasilitaskesehatan.geojson"],{onEachFeature: popupKesehatan }
     ).addTo(map)
 
 
