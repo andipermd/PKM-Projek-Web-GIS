@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.0.1/remixicon.css" crossorigin="" />
+    <link rel="stylesheet" href="./output.css">
+    <link rel="stylesheet" href="../node_modules/leaflet/dist/leaflet.css">
+    <title>Document</title>
+    <style>
+        #map {
+            height: 90%;
+            width: 100%;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <main class="h-screen w-full relative bg-base-200">
+        <h1 id="coordinate" class="text-[13px] text-center text-slate-900 w-[59%] mx-auto  font-bold absolute z-10 inset-x-0 top-[82px] "></h1>
+        <nav class="flex justify-center mx-auto bg-slate-900 absolute z-10 top-5 inset-x-0 rounded-full w-[98%]">
+            <div class="navbar   text-white h-full ">
+                <div class="navbar-start">
+                    <div class="dropdown">
+                        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                            <i class="ri-shapes-line"></i>
+                        </div>
+
+                        <div class="p-0 m-0 bg-red-100 ">
+                            <ul tabindex="0"
+                            class="menu dropdown-content  z-[1] shadow bg-base-100  text-slate-950 ">
+                            <li><a>Homepage</a></li>
+                            <li><a class="panawanganMenu">Tingkat Kerawanan Longsor</a></li>
+                            <li><a class="gadingMenu">Fasilitas Kesehatan</a></li>
+                            <li><a class="gadingMenu">Jalur Evakuasi</a></li>
+                        </ul>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="navbar-center">
+                    <input type="text" class="bg-transparent w-full" placeholder=" mau cari apa ?" for="search">
+                </div>
+                <div class="navbar-end">
+
+                    <button class="btn btn-ghost btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </button>
+                    
+                </div>
+            </div>
+        </nav>
+        <!-- <section class=" h-fit w-full flex justify-center hidden">
+            <ul class="menu menu-horizontal bg-base-200 rounded-box mt-6 absolute z-10 bottom-5">
+                <li>
+                    <a class="tooltip" data-tip="Home">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a class="tooltip" data-tip="Details">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a class="tooltip" data-tip="Stats">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </section> -->
+        <div id="map" class="z-[0]">
+            
+        </div>
+        <footer class="w-full">
+            <ul class="flex justify-around text-sm font-semibold text-center items-center py-3">
+                <li class="flex flex-col cursor-pointer">
+                    <i class="ri-map-pin-fill text-[27px] text-lime-400"></i>
+                    <a href="#">Location</a>
+                </li>
+                <li class="flex flex-col cursor-pointer">
+                    <i class="ri-user-location-fill text-[27px]"></i>
+                    <a href="#">Contact</a>
+                </li>
+                <li class="flex flex-col cursor-pointer">
+                    <i class="ri-error-warning-fill text-[27px]"></i>
+                    <a href="#">Warning</a>
+                </li>
+              
+                
+            </ul>
+            
+        </footer>
+
+        
+
+    </main>
+
+
+
+
+
+    <!-- <section>
+        <div class="hero min-h-screen"
+            style="background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);">
+            <div class="hero-overlay bg-opacity-60"></div>
+            <div class="hero-content text-center text-neutral-content">
+                <div class="max-w-md">
+                    <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
+                    <p class="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
+                        exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                    <button class="btn btn-primary">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- <main class=" bg-slate-200 flex flex-col text-center  ">
+        <div class="font-pop mx-auto ">
+            <h2 class="pt-4">Kecamatan Panawangan</h2>
+            <h1 class="text-xl pb-3 font-semibold">Kabupaten Ciamis Jawa Barat</h1>
+        </div>
+        <div class="h-[300px] w-[95%] mx-auto rounded-box overflow-hidden">
+            <div id="map"></div>
+        </div>
+
+        <div class="pt-5 pb-5 flex w-[95%] gap-2 justify-center mx-auto">
+            <div class="h-[150px] bg-base-100 shadow-xl w-[180px] text-start rounded-box overflow-hidden">
+                <div class="rounded-box ">
+                    <h2 class="font-semibold bg-red-200 px-5 py-3 text-center">Card title</h2>
+                    <span class="text-start font-semibold px-2">Tingkat Bahaya : <span class="population"></span></span>
+                </div>
+            </div>
+            <div class="h-auto bg-base-100 shadow-xl w-[180px] text-start rounded-box overflow-hidden">
+                <div class="rounded-box ">
+                    <h2 class="font-semibold bg-red-200 px-5 py-3 text-center">Card title</h2>
+                    <span class="text-start font-semibold px-2">Tingkat Bahaya : <span class="population"></span></span>
+                </div>
+            </div>
+        </div>
+
+    </main> -->
+
+
+
+</body>
+<!-- URUTAN -->
+<script src="./../node_modules/leaflet/dist/leaflet.js"></script>
+<script src="../GIS/leaflet.ajax.js"></script>
+<script src="./../public/main.js"></script>
+
+
+</html>
